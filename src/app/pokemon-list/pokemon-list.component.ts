@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import pokedexJson from '../../pokedex.json';
 import { JsonLoadService } from '../json-load.service';
 @Component({
   selector: 'app-pokemon-list',
