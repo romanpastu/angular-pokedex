@@ -8,6 +8,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   @Output() featureSelected = new EventEmitter<string>();
+  
   constructor() { }
 
   ngOnInit() {
@@ -15,6 +16,10 @@ export class NavbarComponent implements OnInit {
 
   onUsersClick(feature: string){
     
+    this.featureSelected.emit(feature);
+  }
+
+  onPokemonClick(feature: string){
     this.featureSelected.emit(feature);
   }
 }
