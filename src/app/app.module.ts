@@ -11,15 +11,17 @@ import { environment } from 'src/environments/environment';
 import {FormsModule} from  '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderComponent } from './header/header.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
+import { UserListComponent } from './pokemon-list/user-list/user-list.component';
 @NgModule({
   declarations: [
     AppComponent,
     PokemonListComponent,
     LoginComponent,
-    HeaderComponent,
-    NavbarComponent
+
+    NavbarComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
