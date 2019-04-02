@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserListComponent } from './pokemon-list/user-list/user-list.component';
+import { PokemonCardsComponent } from './pokemon-list/pokemon-cards/pokemon-cards.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import { UserListComponent } from './pokemon-list/user-list/user-list.component'
     LoginComponent,
 
     NavbarComponent,
-    UserListComponent
+    UserListComponent,
+    PokemonCardsComponent,
+    
   ],
   imports: [
     BrowserModule,

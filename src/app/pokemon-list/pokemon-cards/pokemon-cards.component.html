@@ -1,0 +1,11 @@
+  <!--cards-->
+  <div class="row" >
+    <div class="col-sm-2 d-flex align-items-stretch" *ngFor="let data of pokemons.pokemon">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{data.img}}" alt="{{data.name}}">
+        <div class="card-body">
+          <p class="card-text"><span class="pokemon-name" >{{data.name}}</span>  <span class="pokemon-id">{{data.id}}</span> </p>
+        </div>
+      </div>
+    </div>
+  </div>
