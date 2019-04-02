@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 
 
@@ -11,14 +12,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class LoginComponent implements OnInit {
   email = "";
   password = "";
-  constructor(public af: AngularFireAuth) { }
+  constructor(public af: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {
   }
 
   logIn(email, password) {
 
-    this.af.auth.signInWithEmailAndPassword(email, password).catch(function (error) {
+    this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
+      this.router.navigate(['/pokemonlist']);
+    }).catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -34,18 +37,20 @@ export class LoginComponent implements OnInit {
 
   sigIn(email, password) {
 
-    this.af.auth.createUserWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode == 'auth/weak-password') {
-          alert('The password is too weak.');
-        } else {
-          alert(errorMessage);
-        }
-        console.log(error);
-      });
+    this.af.auth.createUserWithEmailAndPassword(email, password).then((user) => {
+      alert("Successful signup, proced to login")
+    }
+    ).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
   }
 
 

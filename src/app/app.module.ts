@@ -22,7 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [JsonLoadService],
   bootstrap: [AppComponent]
