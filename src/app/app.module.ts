@@ -10,6 +10,7 @@ import { AngularFireModule} from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import {FormsModule} from  '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    FormsModule
+    AppRoutingModule
   ],
   providers: [JsonLoadService],
   bootstrap: [AppComponent]
