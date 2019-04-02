@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(email, password) {
-    alert(email+"...."+password+"..login");
-    this.af.auth.signInWithEmailAndPassword(email, password).catch(function(error) {
+
+    this.af.auth.signInWithEmailAndPassword(email, password).catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
 
   sigIn(email, password) {
-    alert(email+"...."+password+"..sigIn");
+
     this.af.auth.createUserWithEmailAndPassword(email, password)
       .catch(function (error) {
         // Handle Errors here.
@@ -47,6 +47,8 @@ export class LoginComponent implements OnInit {
         console.log(error);
       });
   }
+
+
 
 
 }

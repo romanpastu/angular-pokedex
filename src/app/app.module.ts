@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AngularFireModule} from '@angular/fire';
 import { environment } from 'src/environments/environment';
-
+import {FormsModule} from  '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     BrowserModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    FormsModule
   ],
   providers: [JsonLoadService],
   bootstrap: [AppComponent]

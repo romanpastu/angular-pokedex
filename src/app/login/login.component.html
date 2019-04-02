@@ -17,7 +17,7 @@
           <!-- Password-->
           <label class="control-label" for="password">Password</label>
           <div class="controls">
-            <input type="password" id="password" name="password" placeholder="psswd" class="input-xlarge" #psswdInput>
+            <input type="password" id="password" name="password" placeholder="psswd" class="input-xlarge"  #psswdInput>
           </div>
         </div>
         <div class="control-group">
@@ -25,6 +25,7 @@
           <div class="controls">
             <button class="btn btn-success" (click) = "sigIn(emailInput.value,psswdInput.value)">Sign In</button>
             <button class="btn btn-success" (click) = "logIn(emailInput.value,psswdInput.value)">Log In</button>
+            
           </div>
         </div>
       </fieldset>
