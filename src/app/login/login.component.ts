@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output , EventEmitter } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
+
 
 //database interface
 interface Users {
@@ -19,6 +20,9 @@ interface Users {
 export class LoginComponent implements OnInit {
   email = "";
   password = "";
+  //output al navbar
+  @Output() mailOutput = new EventEmitter<string>();
+
 
   //database vars
   usersCol: AngularFirestoreCollection<Users>;
@@ -28,7 +32,7 @@ export class LoginComponent implements OnInit {
   roleDB:number = 1; //default 1 is for average user | 2 is for admin
   //
 
-  constructor(public af: AngularFireAuth, private router: Router, private afs: AngularFirestore) { }
+  constructor(public af: AngularFireAuth, private router: Router, public afs: AngularFirestore) { }
   //afs --> database
   ngOnInit() {
   }
@@ -36,6 +40,9 @@ export class LoginComponent implements OnInit {
   logIn(email, password) {
 
     this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
+      
+      this.mailOutput.emit(email);
+      
       this.router.navigate(['/pokemonlist']);
     }).catch(function (error) {
       // Handle Errors here.
@@ -75,7 +82,13 @@ export class LoginComponent implements OnInit {
 
   //function to post into database on signup
   addPost() {
-    this.afs.collection('users').add({'email': this.mailDB, 'role': this.roleDB});
+    //this.afs.collection('users').add({'email': this.mailDB, 'role': this.roleDB});
+    
+    //the one below is used to insert with a custom id ( the one in the currentuser)
+    this.afs.collection('users').doc(this.af.auth.currentUser.uid).set({
+      email : this.mailDB,
+      role : this.roleDB
+    })
   }
 
 

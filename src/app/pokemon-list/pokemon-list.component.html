@@ -1,7 +1,7 @@
 
 <div class="main">
   <div class="container-fluid">
-    <app-navbar (featureSelected) = "onSelectedFeature($event)"></app-navbar>
+    <app-navbar (featureSelected) = "onSelectedFeature($event)" ></app-navbar>
     <app-user-list *ngIf="featureUserList === 'userlist'"></app-user-list>
     <app-pokemon-cards *ngIf="featurePokemonCard === 'pokedexlist'"></app-pokemon-cards>
 

@@ -1,4 +1,5 @@
 <hr>
 <ul *ngFor="let user of users | async">
   <p [ngStyle]="{'color':user.role === 1 ? 'white' : 'yellow'}">{{ user.email}}</p>
+  
 </ul>

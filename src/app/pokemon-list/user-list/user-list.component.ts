@@ -21,6 +21,7 @@ export class UserListComponent implements OnInit {
   constructor(private afs: AngularFirestore) {
     this.usersCol = this.afs.collection('users');
     this.users = this.usersCol.valueChanges();
+    
    }
 
   ngOnInit() {
