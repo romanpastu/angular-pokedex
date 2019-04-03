@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection , AngularFirestoreDocument} from '@angular/fire/firestore';
+import {Observable} from 'rxjs';
 
-
+//database interface
+interface Users {
+  mailBD: number;
+  roleBD: number;
+}
+//
 
 @Component({
   selector: 'app-login',
@@ -12,8 +19,17 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   email = "";
   password = "";
-  constructor(public af: AngularFireAuth, private router: Router) { }
 
+  //database vars
+  usersCol: AngularFirestoreCollection<Users>;
+  users: Observable<Users[]>;
+
+  mailDB:string = "";
+  roleDB:number = 1;
+  //
+
+  constructor(public af: AngularFireAuth, private router: Router, private afs: AngularFirestore) { }
+  //afs --> database
   ngOnInit() {
   }
 
@@ -38,7 +54,11 @@ export class LoginComponent implements OnInit {
   sigIn(email, password) {
 
     this.af.auth.createUserWithEmailAndPassword(email, password).then((user) => {
-      alert("Successful signup, proced to login")
+      //posts the data into de DB
+      this.mailDB = email;
+      this.addPost();
+      //
+      alert("Successful signup, proced to login");
     }
     ).catch(function (error) {
       // Handle Errors here.
@@ -51,6 +71,11 @@ export class LoginComponent implements OnInit {
       }
       console.log(error);
     });
+  }
+
+  //function to post into database on signup
+  addPost() {
+    this.afs.collection('users').add({'email': this.mailDB, 'role': this.roleDB});
   }
 
 

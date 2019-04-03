@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserListComponent } from './pokemon-list/user-list/user-list.component';
 import { PokemonCardsComponent } from './pokemon-list/pokemon-cards/pokemon-cards.component';
-
+import { AngularFirestoreModule } from '@angular/fire/firestore'
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +33,8 @@ import { PokemonCardsComponent } from './pokemon-list/pokemon-cards/pokemon-card
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularFirestoreModule
   ],
   providers: [JsonLoadService],
   bootstrap: [AppComponent]
