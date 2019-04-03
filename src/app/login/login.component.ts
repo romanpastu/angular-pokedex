@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection , AngularFirestoreDocument} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 
 //database interface
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   users: Observable<Users[]>;
 
   mailDB:string = "";
-  roleDB:number = 1;
+  roleDB:number = 1; //default 1 is for average user | 2 is for admin
   //
 
   constructor(public af: AngularFireAuth, private router: Router, private afs: AngularFirestore) { }
