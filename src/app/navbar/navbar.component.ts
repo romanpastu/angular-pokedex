@@ -12,24 +12,24 @@ export class NavbarComponent implements OnInit {
   @Output() featureSelected = new EventEmitter<string>();
 
   mostrar = true;
-
+  rolId = 0;
   fullUser: any = null;
-
+  
   constructor(public firebase: AngularFireAuth, public db: AngularFirestore) {
-
+    
     let userID = firebase.auth.currentUser.uid;
     console.log(userID);
     console.log(firebase.auth.currentUser.email)
-
+    
     //retrieve logged user data
 
     let docRef = db.collection('users').doc(userID);
-
+    let number;
     docRef.get().toPromise().then(function (doc) {
       if (doc.exists) {
-        console.log("Document data:", doc.data());
-        this.fullUser = doc.data()
-        console.log("ouput: "+ this.fullUser.email)
+        number = doc.data().role;
+        console.log(number);
+        
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -37,7 +37,7 @@ export class NavbarComponent implements OnInit {
     }).catch(function (error) {
       console.log("Error getting document:", error);
     });
-
+    this.rolId = number;
   }
 
   ngOnInit() {
