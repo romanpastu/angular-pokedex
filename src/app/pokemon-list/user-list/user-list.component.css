@@ -1,3 +1,6 @@
 ul p{
     font-weight: bold;
 }
+.body{
+    height: 100vh;
+}
