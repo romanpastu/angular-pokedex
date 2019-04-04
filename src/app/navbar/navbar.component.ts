@@ -11,15 +11,17 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 export class NavbarComponent implements OnInit {
   @Output() featureSelected = new EventEmitter<string>();
 
-  mostrar = false;
-  fullUser: any = null;
-  
+  myName;
+
+  fullUser: any;
+  name: string;
   constructor(public firebase: AngularFireAuth, public db: AngularFirestore) {
     
     let userID = firebase.auth.currentUser.uid;
     console.log(userID);
     console.log(firebase.auth.currentUser.email)
-    
+    console.log(firebase.auth.currentUser.displayName)
+    this.myName = firebase.auth.currentUser.displayName
     //retrieve logged user data
 
     let docRef = db.collection('users').doc(userID);
@@ -28,9 +30,6 @@ export class NavbarComponent implements OnInit {
     docRef.get().toPromise().then(doc => {
       if (doc.exists) {
         this.fullUser = doc.data();
-        console.log(this.fullUser);
-
-        
 
       } else {
         // doc.data() will be undefined in this case

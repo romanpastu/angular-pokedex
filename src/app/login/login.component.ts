@@ -59,13 +59,19 @@ export class LoginComponent implements OnInit {
 
 
   sigIn(email, password) {
-
+    var storedUser = null;
+    var displayName = prompt("Input your display name");
     this.af.auth.createUserWithEmailAndPassword(email, password).then((user) => {
+      storedUser = this. af.auth.currentUser;
+      storedUser.updateProfile({
+        displayName: displayName,
+      });
       //posts the data into de DB
       this.mailDB = email;
       this.addPost();
       //
       alert("Successful signup, proced to login");
+      
     }
     ).catch(function (error) {
       // Handle Errors here.
