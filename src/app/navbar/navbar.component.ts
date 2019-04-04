@@ -17,11 +17,17 @@ export class NavbarComponent implements OnInit {
   name: string;
   constructor(public firebase: AngularFireAuth, public db: AngularFirestore , public router: Router) {
     
-    let userID = firebase.auth.currentUser.uid;
+    // let userID = firebase.auth.currentUser.uid;
+    let userID = localStorage.getItem('user')
+
     console.log(userID);
-    console.log(firebase.auth.currentUser.email)
-    console.log(firebase.auth.currentUser.displayName)
-    this.myName = firebase.auth.currentUser.displayName
+    
+    // console.log(firebase.auth.currentUser.email)
+    // console.log(firebase.auth.currentUser.displayName)
+    // this.myName = firebase.auth.currentUser.displayName
+    this.myName= localStorage.getItem('displayName');
+    console.log(this.myName+ " nombre");
+  
     //retrieve logged user data
 
     let docRef = db.collection('users').doc(userID);
@@ -55,6 +61,9 @@ export class NavbarComponent implements OnInit {
     this.featureSelected.emit(feature);
   }
 
+  onSignOut(){
+    localStorage.clear();
+  }
 
 
 

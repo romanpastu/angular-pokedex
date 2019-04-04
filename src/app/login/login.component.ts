@@ -42,7 +42,12 @@ export class LoginComponent implements OnInit {
     this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
       
       this.mailOutput.emit(email);
-      
+      //localstorage in order to check tokens navigation
+      localStorage.setItem("user", this.af.auth.currentUser.uid);
+      localStorage.setItem("displayName", this.af.auth.currentUser.displayName )
+      console.log(localStorage.user + " : local storage");
+
+
       this.router.navigate(['/pokemonlist']);
     }).catch(function (error) {
       // Handle Errors here.
