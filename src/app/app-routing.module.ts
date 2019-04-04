@@ -12,7 +12,8 @@ const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
   {path: 'pokemonlist', component: PokemonListComponent , canActivate: [AuthGuard] },
   {path: 'login', component: LoginComponent},
-  { path: '',redirectTo: '/login',pathMatch: 'full'}
+  { path: '',redirectTo: '/login',pathMatch: 'full'},
+  {path: '**', redirectTo: '/login'}
 ]
 
 @NgModule({
