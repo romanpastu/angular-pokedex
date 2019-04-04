@@ -15,23 +15,21 @@ export class NavbarComponent implements OnInit {
 
   fullUser: any;
   name: string;
-  constructor(public firebase: AngularFireAuth, public db: AngularFirestore , public router: Router) {
-    
-    // let userID = firebase.auth.currentUser.uid;
-    let userID = localStorage.getItem('user')
+  constructor(public firebase: AngularFireAuth, public db: AngularFirestore, public router: Router) {
+    let userID = firebase.auth.currentUser.uid;
+
 
     console.log(userID);
-    
+
     // console.log(firebase.auth.currentUser.email)
     // console.log(firebase.auth.currentUser.displayName)
-    // this.myName = firebase.auth.currentUser.displayName
-    this.myName= localStorage.getItem('displayName');
-    console.log(this.myName+ " nombre");
-  
+    this.myName = firebase.auth.currentUser.displayName
+
+
     //retrieve logged user data
 
     let docRef = db.collection('users').doc(userID);
-    
+
 
     docRef.get().toPromise().then(doc => {
       if (doc.exists) {
@@ -45,7 +43,7 @@ export class NavbarComponent implements OnInit {
       console.log("Error getting document:", error);
     });
 
-    
+
   }
 
   ngOnInit() {
@@ -61,8 +59,8 @@ export class NavbarComponent implements OnInit {
     this.featureSelected.emit(feature);
   }
 
-  onSignOut(){
-    localStorage.clear();
+  onSignOut() {
+    
   }
 
 

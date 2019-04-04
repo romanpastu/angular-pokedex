@@ -19,7 +19,7 @@
       <li class="nav-item active">
         <a class="nav-link" (click)="onSignOut()"href="#">Sign Out <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active" *ngIf="myName != 'null'">
           <a class="nav-link" [ngStyle]="{'color': 'yellow'}">Welcome {{ myName }} !! <span class="sr-only">(current)</span></a>
       </li>
 
