@@ -4,3 +4,40 @@ ul p{
 .body{
     height: 100vh;
 }
+
+.main{
+    background-color: blue;
+}
+.card{
+    background-color:rgba(173, 216, 230, 0.527);
+    margin-top:1vw;
+    border-radius: 10px;
+}
+
+.card-img-top{
+    border-bottom: 2px solid rgb(143, 177, 187);
+}
+
+.navbar{
+    background-color: rgb(45, 45, 197);
+    color:white;
+    font-size: 1.2vw;
+}
+
+.navbar-brand{
+    font-size:2vw;
+}
+
+.pokemon-id{
+    background-color:green;
+    padding:4px;
+    margin-left:10px;
+    color:white;
+    border-radius:7px;
+}
+
+.pokemon-name{
+    color:white;
+    font-weight:bold;
+}
+

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
   fullUser: any;
   name: string;
-  constructor(public firebase: AngularFireAuth, public db: AngularFirestore) {
+  constructor(public firebase: AngularFireAuth, public db: AngularFirestore , public router: Router) {
     
     let userID = firebase.auth.currentUser.uid;
     console.log(userID);
@@ -46,11 +46,12 @@ export class NavbarComponent implements OnInit {
   }
 
   onUsersClick(feature: string) {
-
+    this.router.navigate(['/userlist']);
     this.featureSelected.emit(feature);
   }
 
   onPokemonClick(feature: string) {
+    this.router.navigate(['/pokemonlist']);
     this.featureSelected.emit(feature);
   }
 

@@ -6,13 +6,14 @@ import { PokemonListComponent } from '../../src/app/pokemon-list/pokemon-list.co
 import {LoginComponent} from '../../src/app/login/login.component'
 import { AuthGuard } from './auth.guard';
 
+import {UserListComponent} from './pokemon-list/user-list/user-list.component'
 
 
 const routes: Routes = [
   {path: 'pokemonlist', component: PokemonListComponent , canActivate: [AuthGuard] },
   {path: 'login', component: LoginComponent},
   { path: '',redirectTo: '/login',pathMatch: 'full'},
-  {path: '**', redirectTo: '/login'}
+  {path: 'userlist', component: UserListComponent , canActivate: [AuthGuard]}
 ]
 
 @NgModule({
