@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div  class="h-100" [ngStyle]="{'background-color':'blue'}">
+<div [ngStyle]="{'background-color':'blue'}">
 <ul *ngFor="let user of users | async">
   <p [ngStyle]="{'color':user.role === 1 ? 'white' : 'yellow'}">{{ user.email}}</p>
   
