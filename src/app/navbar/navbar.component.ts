@@ -11,8 +11,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 export class NavbarComponent implements OnInit {
   @Output() featureSelected = new EventEmitter<string>();
 
-  mostrar = true;
-  rolId = 0;
+  mostrar = false;
   fullUser: any = null;
   
   constructor(public firebase: AngularFireAuth, public db: AngularFirestore) {
@@ -24,12 +23,15 @@ export class NavbarComponent implements OnInit {
     //retrieve logged user data
 
     let docRef = db.collection('users').doc(userID);
-    let number;
-    docRef.get().toPromise().then(function (doc) {
+    
+
+    docRef.get().toPromise().then(doc => {
       if (doc.exists) {
-        number = doc.data().role;
-        console.log(number);
+        this.fullUser = doc.data();
+        console.log(this.fullUser);
+
         
+
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -37,7 +39,8 @@ export class NavbarComponent implements OnInit {
     }).catch(function (error) {
       console.log("Error getting document:", error);
     });
-    this.rolId = number;
+
+    
   }
 
   ngOnInit() {
