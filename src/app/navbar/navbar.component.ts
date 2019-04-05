@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   name: string;
   constructor(public firebase: AngularFireAuth, public db: AngularFirestore, public router: Router) {
     let userID = firebase.auth.currentUser.uid;
-
+    console.log("usuario actual: "+firebase.auth.currentUser);
 
     console.log(userID);
 
@@ -41,6 +41,18 @@ export class NavbarComponent implements OnInit {
       }
     }).catch(function (error) {
       console.log("Error getting document:", error);
+    });
+
+    this.firebase.auth.onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        console.log("authstate user:")
+        console.log(user);
+      } else {
+        // No user is signed in.
+        prompt("no user");
+        console.log('not logged in');
+      }
     });
 
 

@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-
+import {AuthService} from '../services/auth.service'
 
 //database interface
 interface Users {
@@ -15,87 +15,27 @@ interface Users {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [AuthService]
 })
 export class LoginComponent implements OnInit {
-  email = "";
-  password = "";
-  //output al navbar
-  @Output() mailOutput = new EventEmitter<string>();
+  
 
+  constructor(private _authS: AuthService) { }
 
-  //database vars
-  usersCol: AngularFirestoreCollection<Users>;
-  users: Observable<Users[]>;
-
-  mailDB:string = "";
-  roleDB:number = 1; //default 1 is for average user | 2 is for admin
-  //
-
-  constructor(public af: AngularFireAuth, private router: Router, public afs: AngularFirestore) { }
-  //afs --> database
   ngOnInit() {
   }
 
   logIn(email, password) {
-
-    this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
-      
-      this.mailOutput.emit(email);
-
-      this.router.navigate(['/pokemonlist']);
-    }).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode === 'auth/wrong-password') {
-        alert('Wrong password.');
-      } else {
-        alert(errorMessage);
-      }
-      console.log(error);
-    });
+    this._authS.logIn(email,password);
   }
 
 
   sigIn(email, password) {
-    var storedUser = null;
-    var displayName = prompt("Input your display name");
-    this.af.auth.createUserWithEmailAndPassword(email, password).then((user) => {
-      storedUser = this. af.auth.currentUser;
-      storedUser.updateProfile({
-        displayName: displayName,
-      });
-      //posts the data into de DB
-      this.mailDB = email;
-      this.addPost();
-      //
-      alert("Successful signup, proced to login");
-      
-    }
-    ).catch(function (error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-      } else {
-        alert(errorMessage);
-      }
-      console.log(error);
-    });
+    this._authS.sigIn(email,password);
   }
 
-  //function to post into database on signup
-  addPost() {
-    //this.afs.collection('users').add({'email': this.mailDB, 'role': this.roleDB});
-    
-    //the one below is used to insert with a custom id ( the one in the currentuser)
-    this.afs.collection('users').doc(this.af.auth.currentUser.uid).set({
-      email : this.mailDB,
-      role : this.roleDB
-    })
-  }
+ 
 
 
 

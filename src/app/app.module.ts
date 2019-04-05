@@ -16,6 +16,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UserListComponent } from './pokemon-list/user-list/user-list.component';
 import { PokemonCardsComponent } from './pokemon-list/pokemon-cards/pokemon-cards.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
+import {AuthService} from '../app/services/auth.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
     FormsModule,
     AngularFirestoreModule
   ],
-  providers: [JsonLoadService],
+  providers: [JsonLoadService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
