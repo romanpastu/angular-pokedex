@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import * as firebase from 'firebase';
+import { AuthGuard } from '../auth.guard';
 
 
 
@@ -30,12 +31,24 @@ roleDB:number = 1; //default 1 is for average user | 2 is for admin
 
   constructor(public af: AngularFireAuth, private router: Router, public afs: AngularFirestore ) { }
 
+  authUser = null;
+  user = this.af.authState.pipe((authState) => {
+    if(!authState){
+      return null;
+    }else{
+      this.authUser = authState;
+      return authState;
+    }
+  });
+
+
   logIn(email, password) {
 
     this.af.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
   
       this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
-      
+        this.authUser = user.user;
+        
         this.mailOutput.emit(email);
   
         this.router.navigate(['/pokemonlist']);

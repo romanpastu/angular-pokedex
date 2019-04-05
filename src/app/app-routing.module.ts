@@ -10,7 +10,7 @@ import {UserListComponent} from './pokemon-list/user-list/user-list.component'
 
 
 const routes: Routes = [
-  {path: 'pokemonlist', component: PokemonListComponent , canActivate: [AuthGuard] },
+  {path: 'pokemonlist', component: PokemonListComponent , canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   { path: '',redirectTo: '/login',pathMatch: 'full'},
   {path: 'userlist', component: UserListComponent , canActivate: [AuthGuard]}

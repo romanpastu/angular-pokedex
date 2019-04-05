@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-
+import {AuthService} from '../services/auth.service'
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
 
   fullUser: any;
   name: string;
-  constructor(public firebase: AngularFireAuth, public db: AngularFirestore, public router: Router) {
+  constructor(public firebase: AngularFireAuth, public db: AngularFirestore, public router: Router,  private _authS: AuthService) {
     this.firebase.auth.onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
@@ -29,8 +29,10 @@ export class NavbarComponent implements OnInit {
     });
     //
     let userID = firebase.auth.currentUser.uid;
-    console.log("usuario actual: "+firebase.auth.currentUser);
+    console.log("----||-----")
 
+    console.log("usuario actual: "+firebase.auth.currentUser.uid);
+    console.log("usuario actual nuevo: "+this._authS.authUser)
     console.log(userID);
 
     // console.log(firebase.auth.currentUser.email)
