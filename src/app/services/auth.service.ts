@@ -4,6 +4,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
+import * as firebase from 'firebase';
+
+
 
 //database interface
 interface Users {
@@ -29,7 +32,7 @@ roleDB:number = 1; //default 1 is for average user | 2 is for admin
 
   logIn(email, password) {
 
-    
+    this.af.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
   
       this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
       
@@ -47,8 +50,8 @@ roleDB:number = 1; //default 1 is for average user | 2 is for admin
         }
         console.log(error);
       });
-    }
-  
+    });
+  }
   
 
     sigIn(email, password) {
