@@ -28,18 +28,19 @@ export class NavbarComponent implements OnInit {
       }
     });
     //
-    let userID = firebase.auth.currentUser.uid;
+    //let userID = this.firebase.auth.currentUser.uid;
+    let userID = localStorage.getItem('user')
     console.log("----||-----")
 
-    console.log("usuario actual: "+firebase.auth.currentUser.uid);
-    console.log("usuario actual nuevo: "+this._authS.authUser)
+    //console.log("usuario actual: "+this.firebase.auth.currentUser.uid);
     console.log(userID);
 
     // console.log(firebase.auth.currentUser.email)
     // console.log(firebase.auth.currentUser.displayName)
-    this.myName = firebase.auth.currentUser.displayName
-
-
+    //this.myName = this.firebase.auth.currentUser.displayName
+    this.myName= localStorage.getItem('displayName');
+    console.log(this.myName+ " nombre");
+    
     //retrieve logged user data
 
     let docRef = db.collection('users').doc(userID);
@@ -48,7 +49,10 @@ export class NavbarComponent implements OnInit {
     docRef.get().toPromise().then(doc => {
       if (doc.exists) {
         this.fullUser = doc.data();
-
+        console.log("FUll User")
+        
+        console.log(this.fullUser.role) //tengo que pasar esto de alguna forma y que compruebe el tol con el authguard
+        
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -56,8 +60,7 @@ export class NavbarComponent implements OnInit {
     }).catch(function (error) {
       console.log("Error getting document:", error);
     });
-
-    
+   
 
 
   }
@@ -65,18 +68,18 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  onUsersClick(feature: string) {
+  onUsersClick() {
     this.router.navigate(['/userlist']);
-    this.featureSelected.emit(feature);
+    // this.featureSelected.emit(feature);
   }
 
   onPokemonClick(feature: string) {
     this.router.navigate(['/pokemonlist']);
-    this.featureSelected.emit(feature);
+    // this.featureSelected.emit(feature);
   }
 
   onSignOut() {
-    
+    localStorage.clear();
   }
 
 

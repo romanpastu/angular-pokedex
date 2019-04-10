@@ -17,7 +17,11 @@ interface Users {
 export class LoginComponent implements OnInit {
   
 
-  constructor(private _authS: AuthService) { }
+  constructor(private _authS: AuthService) {
+    if(localStorage.getItem('user')){
+      localStorage.clear();
+    }
+   }
 
   ngOnInit() {
   }

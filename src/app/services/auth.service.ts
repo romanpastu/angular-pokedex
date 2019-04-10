@@ -31,15 +31,16 @@ roleDB:number = 1; //default 1 is for average user | 2 is for admin
 
   constructor(public af: AngularFireAuth, private router: Router, public afs: AngularFirestore ) { }
 
-  authUser = null;
-  user = this.af.authState.pipe((authState) => {
-    if(!authState){
-      return null;
-    }else{
-      this.authUser = authState;
-      return authState;
-    }
-  });
+  // authUser = null;
+  // user = this.af.authState.pipe((authState) => {
+  //   if(!authState){
+  //     return null;
+  //   }else{
+  //     this.authUser = authState;
+      
+  //     return authState;
+  //   }
+  // });
 
 
   logIn(email, password) {
@@ -47,10 +48,15 @@ roleDB:number = 1; //default 1 is for average user | 2 is for admin
     this.af.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
   
       this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
-        this.authUser = user.user;
+        //this.authUser = user.user;
         
         this.mailOutput.emit(email);
-  
+        //localstorage
+        
+        localStorage.setItem("user", this.af.auth.currentUser.uid);
+        localStorage.setItem("displayName", this.af.auth.currentUser.displayName )
+        console.log(localStorage.user + " : local storage");
+        //
         this.router.navigate(['/pokemonlist']);
       }).catch(function (error) {
         // Handle Errors here.
@@ -71,7 +77,7 @@ roleDB:number = 1; //default 1 is for average user | 2 is for admin
       var storedUser = null;
       var displayName = prompt("Input your display name");
       this.af.auth.createUserWithEmailAndPassword(email, password).then((user) => {
-        storedUser = this. af.auth.currentUser;
+        storedUser = this.af.auth.currentUser;
         storedUser.updateProfile({
           displayName: displayName,
         });
