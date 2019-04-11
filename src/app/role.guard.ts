@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class RoleGuard implements CanActivate {
-  data2 = 1
+  data2 
   constructor(public db: AngularFirestore, private myRoute: Router){
 
   }
@@ -15,23 +15,24 @@ export class RoleGuard implements CanActivate {
     {
     var docRef = this.db.collection('users').doc(localStorage.getItem('user'));
     
-
+      
     docRef.get().toPromise().then(doc => {
       if (doc.exists) {
         this.data2 = doc.data().role;
         console.log("data role")
         console.log(this.data2) 
+        
       } 
     });
-    
     if(this.data2 == 2 && localStorage.getItem('user')){
       console.log("ROLE GUARD")
       return true;
     }else{
       console.log("ROLE NO GUARD")
-      this.myRoute.navigate(["login"]);
+      // localStorage.clear();
       return false;
     }
+    
     
   }
   
