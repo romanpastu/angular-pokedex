@@ -69,6 +69,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onUsersClick() {
+    console.log("fist click")
     this.router.navigate(['/userlist']);
     // this.featureSelected.emit(feature);
   }
