@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'pokemonlist', component: PokemonListComponent , canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: '',redirectTo: '/login',pathMatch: 'full'},
-  {path: 'userlist', component: UserListComponent , canActivate : [ RoleGuard]}
+  {path: 'userlist', component: UserListComponent , canActivate : [ RoleGuard]} //this is the guard we are looking at
 ]
 
 @NgModule({
