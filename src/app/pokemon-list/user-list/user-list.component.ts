@@ -32,7 +32,10 @@ export class UserListComponent implements OnInit {
     const usersColl = this.afs.collection("users"); usersColl.get().toPromise().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) { 
         // doc.data() is never undefined for query doc snapshots 
-        if (doc.data().email == email) { 
+        if(doc.id == localStorage.getItem('user')){
+          alert("You cant change the role of your own user")
+        }
+        if (doc.data().email == email && doc.id != localStorage.getItem('user')) { 
           if(doc.data().role == 1){
             usersColl.doc(doc.id).set({ role: 2 }, { merge: true }) 
           }else if(doc.data().role == 2){
