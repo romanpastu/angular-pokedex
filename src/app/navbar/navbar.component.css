@@ -21,6 +21,7 @@
 
 .navbar-brand{
     font-size:2vw;
+    color: gold
 }
 
 .pokemon-id{
@@ -34,4 +35,16 @@
 .pokemon-name{
     color:white;
     font-weight:bold;
+}
+
+@media screen and (max-width: 480px) 
+{
+    .navbar{
+        
+        font-size: 3.5vw;
+    }
+    
+    .navbar-brand{
+        font-size:4vw;
+    }
 }
