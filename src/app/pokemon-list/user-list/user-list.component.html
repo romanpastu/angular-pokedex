@@ -2,6 +2,6 @@
 <div [ngStyle]="{'background-color':'blue'}">
 <ul *ngFor="let user of users | async">
   <p [ngStyle]="{'color':user.role === 1 ? 'white' : 'yellow'}">{{ user.email}}</p>
-  
+  <button  class="btn btn-primary" (click)="onChangeRole( user.email )">Change role</button>
 </ul>
 </div>
