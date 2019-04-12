@@ -4,8 +4,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import * as crypto from 'crypto-js';
-
 
 
 //database interface
@@ -26,20 +24,10 @@ export class AuthService {
 
   mailDB: string = "";
   roleDB: number = 1; //default 1 is for average user | 2 is for admin
-  //
+  
 
   constructor(public af: AngularFireAuth, private router: Router, public afs: AngularFirestore) { }
 
-  // authUser = null;
-  // user = this.af.authState.pipe((authState) => {
-  //   if(!authState){
-  //     return null;
-  //   }else{
-  //     this.authUser = authState;
-
-  //     return authState;
-  //   }
-  // });
 
 
   logIn(email, password) {
@@ -47,7 +35,6 @@ export class AuthService {
 
 
     this.af.auth.signInWithEmailAndPassword(email, password).then((user) => {
-      //this.authUser = user.user;
 
       this.mailOutput.emit(email);
       //localstorage
@@ -102,9 +89,7 @@ export class AuthService {
 
   //function to post into database on signup
   addPost() {
-    //this.afs.collection('users').add({'email': this.mailDB, 'role': this.roleDB});
-
-    //the one below is used to insert with a custom id ( the one in the currentuser)
+    //used to insert with a custom id 
     this.afs.collection('users').doc(this.af.auth.currentUser.uid).set({
       email: this.mailDB,
       role: this.roleDB
