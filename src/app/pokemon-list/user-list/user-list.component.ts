@@ -29,7 +29,9 @@ export class UserListComponent implements OnInit {
   }
 
   onChangeRole(email) {
-    const usersColl = this.afs.collection("users"); usersColl.get().toPromise().then(function (querySnapshot) {
+    const usersColl = this.afs.collection("users");
+    
+    usersColl.get().toPromise().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) { 
         // doc.data() is never undefined for query doc snapshots 
         if (doc.data().email == email && doc.id != localStorage.getItem('user')) { 
