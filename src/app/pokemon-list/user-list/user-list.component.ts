@@ -21,7 +21,7 @@ export class UserListComponent implements OnInit {
   constructor(public afs: AngularFirestore) {
     this.usersCol = this.afs.collection('users');
     this.users = this.usersCol.valueChanges();
-
+    
   }
 
   ngOnInit() {
@@ -32,9 +32,6 @@ export class UserListComponent implements OnInit {
     const usersColl = this.afs.collection("users"); usersColl.get().toPromise().then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) { 
         // doc.data() is never undefined for query doc snapshots 
-        if(doc.id == localStorage.getItem('user')){
-          alert("You cant change the role of your own user")
-        }
         if (doc.data().email == email && doc.id != localStorage.getItem('user')) { 
           if(doc.data().role == 1){
             usersColl.doc(doc.id).set({ role: 2 }, { merge: true }) 
