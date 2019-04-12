@@ -17,6 +17,9 @@ import { UserListComponent } from './pokemon-list/user-list/user-list.component'
 import { PokemonCardsComponent } from './pokemon-list/pokemon-cards/pokemon-cards.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 import {AuthService} from '../app/services/auth.service'
+import { CollapseModule } from 'ngx-bootstrap/collapse'
+import { BsDropdownModule} from 'ngx-bootstrap/dropdown'
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +38,10 @@ import {AuthService} from '../app/services/auth.service'
     AngularFireAuthModule,
     AppRoutingModule,
     FormsModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CollapseModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    NgbCollapseModule
   ],
   providers: [JsonLoadService, AuthService],
   bootstrap: [AppComponent]
