@@ -51,21 +51,11 @@ export class AuthService {
 
       this.mailOutput.emit(email);
       //localstorage
-
-      localStorage.setItem("user", this.af.auth.currentUser.uid);
-      localStorage.setItem("displayName", this.af.auth.currentUser.displayName)
-      console.log(localStorage.user + " : local storage");
-      //
       
-      var key= window.crypto.getRandomValues(new Uint8Array(16));
-      var iv= window.crypto.getRandomValues(new Uint8Array(16));
+      localStorage.setItem("user", this.af.auth.currentUser.uid);
+      localStorage.setItem("displayName", this.af.auth.currentUser.displayName);
+      console.log(localStorage.user + " : local storage");
 
-      var encrypted = crypto.AES.encrypt(this.af.auth.currentUser.uid, key, { iv: iv });
-      console.log("decrypted: "+this.af.auth.currentUser.uid)
-      console.log("encrypted: "+encrypted)
-      //
-
-      //
       this.router.navigate(['/pokemonlist']);
     }).catch(function (error) {
       // Handle Errors here.
